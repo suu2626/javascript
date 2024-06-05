@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .Header {
+            width: 100%;
+            height: 60px;
+            background-color: yellow;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .Logo {
+            color: black;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .Main {
+            max-width: 100%;
+            padding-top: 12px;
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 32px;
+            background-color: #eee;
+        }
+
+        .Section {
+            margin-top: 20px;
+            width: 100%;
+            height: 400px;
+            background-color: #7fffd4;
+        }
+
+        .Menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 20;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: #fff;
+            transform: translateX(100%);
+            transition: all 0.3s;
+        }
+
+        .Menu-Header {
+            width: 100%;
+            height: 60px;
+            background-color: yellow;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            font-size: 32px;
+        }
+
+        .Menu-List {
+            width: 100%;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .Menu-List-Item {
+            border-bottom: 1px solid #ccc;
+            width: 100%;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            padding-left: 32px;
+            font-weight: bold;
+        }
+
+        .Button {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 30;
+            height: 60px;
+            padding-left: 10px;
+            padding-right: 20px;
+            background-color: yellow;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .Button-Line {
+            width: 40px;
+            height: 3px;
+            background-color: black;
+            margin: 4px 0;
+            transition: all 0.3s;
+        }
+
+        .Button-Line__Top__isOpen {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .Button-Line__Medium__isOpen {
+            opacity: 0;
+        }
+
+        .Button-Line__Bottom__isOpen {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .Menu-isOpen {
+            transform: translateX(0);
+        }
+
+        .Overlay {
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .Overlay__isOpen {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .IsScrollAllowed {
+            overflow: hidden;
+        }
+
+        /* Reset CSS */
+        *,
+        ::before,
+        ::after {
+            box-sizing: border-box;
+            border-style: solid;
+            border-width: 0;
+        }
+
+        html {
+            line-height: 1.15;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            background-color: transparent;
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body style="margin: 0 !important;">
+    <header class="Header">
+        <h1 class="Logo">hamburgerMenu</h1>
+        <!-- ハンバーガーボタン -->
+        <button class="Button" id="hamburgerButton">
+            <div class="Button-Line" id="topLine"></div>
+            <div class="Button-Line" id="middleLine"></div>
+            <div class="Button-Line" id="bottomLine"></div>
+        </button>
+        <!-- ハンバーガーボタン -->
+        <div class="Overlay" id="overlay"></div>
+        <!-- ハンバーガーメニュー -->
+        <nav class="Menu" id="menu">
+            <div class="Menu-Header">MENU</div>
+            <ul class="Menu-List">
+                <li class="Menu-List-Item">
+                    <a href="./sample.html" class="Menu-List-Item-Link">アイテム1</a>
+                </li>
+                <li class="Menu-List-Item">
+                    <a href="./sample.html" class="Menu-List-Item-Link">アイテム2</a>
+                </li>
+                <li class="Menu-List-Item">
+                    <a href="./sample.html" class="Menu-List-Item-Link">アイテム3</a>
+                </li>
+                <li class="Menu-List-Item">
+                    <a href="./sample.html" class="Menu-List-Item-Link">アイテム4</a>
+                </li>
+                <li class="Menu-List-Item">
+                    <a href="./sample.html" class="Menu-List-Item-Link">アイテム5</a>
+                </li>
+                <li class="Menu-List-Item">
+                    <a href="./sample.html" class="Menu-List-Item-Link">アイテム6</a>
+                </li>
+                <li class="Menu-List-Item">
+                    <a href="./sample.html" class="Menu-List-Item-Link">アイテム7</a>
+                </li>
+                <li class="Menu-List-Item">
+                    <a href="./sample.html" class="Menu-List-Item-Link">アイテム8</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- ハンバーガーメニュー -->
+    </header>
+    <main class="Main">
+        <section class="Section"></section>
+        <section class="Section"></section>
+        <section class="Section"></section>
+        <section class="Section"></section>
+        <section class="Section"></section>
+        <section class="Section"></section>
+        <section class="Section"></section>
+    </main>
+    <script>
+        const hamburgerButton = document.getElementById('hamburgerButton');
+        const overlay = document.getElementById('overlay');
+        const menu = document.getElementById('menu');
+        const topLine = document.getElementById('topLine');
+        const middleLine = document.getElementById('middleLine');
+        const bottomLine = document.getElementById('bottomLine');
+
+        hamburgerButton.addEventListener('click', () => {
+            menu.classList.toggle('Menu-isOpen');
+            overlay.classList.toggle('Overlay__isOpen');
+            document.body.classList.toggle('IsScrollAllowed');
+            topLine.classList.toggle('Button-Line__Top__isOpen');
+            middleLine.classList.toggle('Button-Line__Medium__isOpen');
+            bottomLine.classList.toggle('Button-Line__Bottom__isOpen');
+        });
+
+        overlay.addEventListener('click', () => {
+            menu.classList.remove('Menu-isOpen');
+            overlay.classList.remove('Overlay__isOpen');
+            document.body.classList.remove('IsScrollAllowed');
+            topLine.classList.remove('Button-Line__Top__isOpen');
+            middleLine.classList.remove('Button-Line__Medium__isOpen');
+            bottomLine.classList.remove('Button-Line__Bottom__isOpen');
+        });
+    </script>
+</body>
+</html>
