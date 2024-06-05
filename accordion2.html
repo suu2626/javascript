@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .AccordionMenu {
+            margin-left: auto;
+            margin-right: auto;
+            width: 400px;
+        }
+
+        .Menu {
+            width: 100%;
+            background-color: #fff;
+        }
+
+        .Menu-Item {
+            margin-bottom: 1px;
+            width: 100%;
+            background-color: gray;
+        }
+
+        .Menu-Item-Label {
+            width: 100%;
+            height: 40px;
+            padding-left: 16px;
+            padding-right: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .SubMenu {
+            width: 100%;
+            background-color: #fff;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .SubMenu-Item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 16px;
+            padding-right: 16px;
+            border-top: 1px solid gray;
+        }
+
+        .SubMenu-Item-Link {
+            color: gray;
+            text-decoration: none;
+        }
+
+        /* Reset CSS */
+        *,
+        ::before,
+        ::after {
+            box-sizing: border-box;
+            border-style: solid;
+            border-width: 0;
+        }
+
+        html {
+            line-height: 1.15;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            background-color: transparent;
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <nav class="AccordionMenu">
+        <ul class="Menu">
+            <li class="Menu-Item">
+                <span class="Menu-Item-Label">メニュー1</span>
+                <ul class="SubMenu">
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー1</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー2</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー3</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー4</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="Menu-Item">
+                <span class="Menu-Item-Label">メニュー2</span>
+                <ul class="SubMenu">
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー1</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー2</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー3</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー4</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="Menu-Item">
+                <span class="Menu-Item-Label">メニュー3</span>
+                <ul class="SubMenu">
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー1</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー2</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー3</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー4</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="Menu-Item">
+                <span class="Menu-Item-Label">メニュー4</span>
+                <ul class="SubMenu">
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー1</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー2</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー3</a>
+                    </li>
+                    <li class="SubMenu-Item">
+                        <a href="./sample.html" class="SubMenu-Item-Link">サブメニュー4</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <script>
+        document.querySelectorAll('.Menu-Item-Label').forEach(label => {
+            label.addEventListener('click', () => {
+                const subMenu = label.nextElementSibling;
+                if (subMenu.style.maxHeight) {
+                    subMenu.style.maxHeight = null;
+                } else {
+                    document.querySelectorAll('.SubMenu').forEach(menu => {
+                        menu.style.maxHeight = null;
+                    });
+                    subMenu.style.maxHeight = subMenu.scrollHeight + 'px';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
