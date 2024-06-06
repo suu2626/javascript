@@ -163,15 +163,23 @@
         </ul>
     </nav>
     <script>
+        // すべてのメニューアイテムのラベルに対して、以下の処理を行う
         document.querySelectorAll('.Menu-Item-Label').forEach(label => {
+            // ラベルがクリックされたときのイベントリスナーを追加
             label.addEventListener('click', () => {
+                // クリックされたラベルの次の兄弟要素（サブメニュー）を取得
                 const subMenu = label.nextElementSibling;
+
+                // サブメニューのmaxHeightスタイルが設定されているか確認
                 if (subMenu.style.maxHeight) {
+                    // サブメニューが開いている場合は閉じる（maxHeightをnullに設定）
                     subMenu.style.maxHeight = null;
                 } else {
+                    // すべてのサブメニューを取得して閉じる（maxHeightをnullに設定）
                     document.querySelectorAll('.SubMenu').forEach(menu => {
                         menu.style.maxHeight = null;
                     });
+                    // クリックされたサブメニューを開く（maxHeightにサブメニューのスクロール高さを設定）
                     subMenu.style.maxHeight = subMenu.scrollHeight + 'px';
                 }
             });

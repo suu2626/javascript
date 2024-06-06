@@ -1,540 +1,192 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-  </head>
-  <body>
+    <style>
+        .Header {
+            width: 100%;
+            height: 60px;
+            background-color: yellow;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .Logo {
+            color: black;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .Main {
+            max-width: 100%;
+            padding-top: 12px;
+            padding-left: 32px;
+            padding-right: 32px;
+            padding-bottom: 32px;
+            background-color: #eee;
+        }
+
+        .Section {
+            position: relative; /* 親要素を相対位置に設定 */
+            margin-top: 20px;
+            width: 100%;
+            height: 400px;
+            background-color: #7fffd4;
+        }
+
+        .Button {
+          width: 120px;
+          padding: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: yellow;
+          color: black;
+        }
+
+        .Modal {
+            display: none; /* 初期状態では非表示 */
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4); /* 黒の背景色、透明度0.4 */
+        }
+
+        .Modal-Content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .CloseModalButton {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .CloseModalButton:hover,
+        .CloseModalButton:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .IsScrollAllowed {
+            overflow: hidden;
+        }
+
+        /* Reset CSS */
+        *,
+        ::before,
+        ::after {
+            box-sizing: border-box;
+            border-style: solid;
+            border-width: 0;
+        }
+
+        html {
+            line-height: 1.15;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            background-color: transparent;
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body style="margin: 0 !important;">
     <header class="Header">
-      <h1 class="Logo">modal</h1>
+        <h1 class="Logo">modal</h1>
     </header>
-    <div class="Modal">モーダルウィンドウです</div>
-    <div class="Overlay"></div>
     <main class="Main">
-      <section class="Section"><button class="Button">ボタン</button></section>
-      <section class="Section"><button class="Button">ボタン</button></section>
-      <section class="Section"><button class="Button">ボタン</button></section>
-      <section class="Section"><button class="Button">ボタン</button></section>
-      <section class="Section"><button class="Button">ボタン</button></section>
-      <section class="Section"><button class="Button">ボタン</button></section>
-      <section class="Section"><button class="Button">ボタン</button></section>
+        <section class="Section">
+            <button class="Button">ボタン</button>
+        </section>
+        <section class="Section">
+            <button class="Button">ボタン</button>
+        </section>
+        <section class="Section">
+            <button class="Button">ボタン</button>
+        </section>
+        <section class="Section">
+            <button class="Button">ボタン</button>
+        </section>
+        <section class="Section">
+            <button class="Button">ボタン</button>
+        </section>
+        <section class="Section">
+            <button class="Button">ボタン</button>
+        </section>
+        <section class="Section">
+            <button class="Button">ボタン</button>
+        </section>
     </main>
 
-  </body>
+    <!-- モーダルウィンドウ -->
+    <div class="Modal" id="modal">
+        <div class="Modal-Content">
+            <span class="CloseModalButton">&times;</span>
+            <h2>モーダルウィンドウ</h2>
+            <p>ここにモーダルの内容を追加します。</p>
+        </div>
+    </div>
+    
+    <script>
+        // モーダルを取得
+        const modal = document.getElementById('modal');
+
+        // セクション内のすべてのボタンを取得
+        const buttons = document.querySelectorAll('.Section .Button');
+
+        // モーダルを閉じるボタンを取得
+        const closeModalButton = document.querySelector('.CloseModalButton');
+
+        // すべてのボタンにクリックイベントを追加
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                modal.style.display = 'block';
+                document.body.classList.add('IsScrollAllowed');
+            });
+        });
+
+        // モーダルを閉じるときの処理
+        closeModalButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.classList.remove('IsScrollAllowed');
+        });
+
+        // モーダルの外側をクリックしたときに閉じる処理
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.body.classList.remove('IsScrollAllowed');
+            }
+        });
+    </script>
+</body>
 </html>
-
-
-
-<style>
-body {
-  width: 100%;
-}
-
-.Header {
-  width: 100%;
-  height: 60px;
-  background-color: yellow;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.Logo {
-  color: black;
-  font-size: 32px;
-  font-weight: bold;
-}
-
-.Main {
-  width: 100%;
-  padding-top: 12px;
-  padding-left: 32px;
-  padding-right: 32px;
-  padding-bottom: 32px;
-  background-color: #eee;
-}
-
-.Section {
-  margin-top: 20px;
-  width: 100%;
-  height: 400px;
-  background-color: #7fffd4;
-}
-
-.Modal {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 20;
-  margin: auto;
-  width: 400px;
-  height: 200px;
-  padding: 32px;
-  color: black;
-  background-color: aliceblue;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.Modal__isOpen {
-  visibility: visible;
-  opacity: 1;
-}
-
-.Overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.Overlay__isOpen {
-  visibility: visible;
-  opacity: 1;
-}
-
-.Button {
-  width: 120px;
-  padding: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: yellow;
-  color: black;
-}
-
-
-/* 本来、下記cssはファイルを分けて上記cssより先に読み込ませるが、記述が多いため下に記述してます。 */
-
-/*! destyle.css v3.0.0 | MIT License | https://github.com/nicolas-cusan/destyle.css */
-
-/* Reset box-model and set borders */
-/* ============================================ */
-
-*,
-::before,
-::after {
-  box-sizing: border-box;
-  border-style: solid;
-  border-width: 0;
-}
-
-/* Document */
-/* ============================================ */
-
-/**
- * 1. Correct the line height in all browsers.
- * 2. Prevent adjustments of font size after orientation changes in iOS.
- * 3. Remove gray overlay on links for iOS.
- */
-
-html {
-  line-height: 1.15; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-  -webkit-tap-highlight-color: transparent; /* 3*/
-}
-
-/* Sections */
-/* ============================================ */
-
-/**
- * Remove the margin in all browsers.
- */
-
-body {
-  margin: 0;
-}
-
-/**
- * Render the `main` element consistently in IE.
- */
-
-main {
-  display: block;
-}
-
-/* Vertical rhythm */
-/* ============================================ */
-
-p,
-table,
-blockquote,
-address,
-pre,
-iframe,
-form,
-figure,
-dl {
-  margin: 0;
-}
-
-/* Headings */
-/* ============================================ */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
-  margin: 0;
-}
-
-/* Lists (enumeration) */
-/* ============================================ */
-
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* Lists (definition) */
-/* ============================================ */
-
-dt {
-  font-weight: bold;
-}
-
-dd {
-  margin-left: 0;
-}
-
-/* Grouping content */
-/* ============================================ */
-
-/**
- * 1. Add the correct box sizing in Firefox.
- * 2. Show the overflow in Edge and IE.
- */
-
-hr {
-  box-sizing: content-box; /* 1 */
-  height: 0; /* 1 */
-  overflow: visible; /* 2 */
-  border-top-width: 1px;
-  margin: 0;
-  clear: both;
-  color: inherit;
-}
-
-/**
- * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
- */
-
-pre {
-  font-family: monospace, monospace; /* 1 */
-  font-size: inherit; /* 2 */
-}
-
-address {
-  font-style: inherit;
-}
-
-/* Text-level semantics */
-/* ============================================ */
-
-/**
- * Remove the gray background on active links in IE 10.
- */
-
-a {
-  background-color: transparent;
-  text-decoration: none;
-  color: inherit;
-}
-
-/**
- * 1. Remove the bottom border in Chrome 57-
- * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
- */
-
-abbr[title] {
-  text-decoration: underline dotted; /* 2 */
-}
-
-/**
- * Add the correct font weight in Chrome, Edge, and Safari.
- */
-
-b,
-strong {
-  font-weight: bolder;
-}
-
-/**
- * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
- */
-
-code,
-kbd,
-samp {
-  font-family: monospace, monospace; /* 1 */
-  font-size: inherit; /* 2 */
-}
-
-/**
- * Add the correct font size in all browsers.
- */
-
-small {
-  font-size: 80%;
-}
-
-/**
- * Prevent `sub` and `sup` elements from affecting the line height in
- * all browsers.
- */
-
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-sub {
-  bottom: -0.25em;
-}
-
-sup {
-  top: -0.5em;
-}
-
-/* Replaced content */
-/* ============================================ */
-
-/**
- * Prevent vertical alignment issues.
- */
-
-svg,
-img,
-embed,
-object,
-iframe {
-  vertical-align: bottom;
-}
-
-/* Forms */
-/* ============================================ */
-
-/**
- * Reset form fields to make them styleable.
- * 1. Make form elements stylable across systems iOS especially.
- * 2. Inherit text-transform from parent.
- */
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  -webkit-appearance: none; /* 1 */
-  appearance: none;
-  vertical-align: middle;
-  color: inherit;
-  font: inherit;
-  background: transparent;
-  padding: 0;
-  margin: 0;
-  border-radius: 0;
-  text-align: inherit;
-  text-transform: inherit; /* 2 */
-}
-
-/**
- * Reset radio and checkbox appearance to preserve their look in iOS.
- */
-
-[type="checkbox"] {
-  -webkit-appearance: checkbox;
-  appearance: checkbox;
-}
-
-[type="radio"] {
-  -webkit-appearance: radio;
-  appearance: radio;
-}
-
-/**
- * Correct cursors for clickable elements.
- */
-
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  cursor: pointer;
-}
-
-button:disabled,
-[type="button"]:disabled,
-[type="reset"]:disabled,
-[type="submit"]:disabled {
-  cursor: default;
-}
-
-/**
- * Improve outlines for Firefox and unify style with input elements & buttons.
- */
-
-:-moz-focusring {
-  outline: auto;
-}
-
-select:disabled {
-  opacity: inherit;
-}
-
-/**
- * Remove padding
- */
-
-option {
-  padding: 0;
-}
-
-/**
- * Reset to invisible
- */
-
-fieldset {
-  margin: 0;
-  padding: 0;
-  min-width: 0;
-}
-
-legend {
-  padding: 0;
-}
-
-/**
- * Add the correct vertical alignment in Chrome, Firefox, and Opera.
- */
-
-progress {
-  vertical-align: baseline;
-}
-
-/**
- * Remove the default vertical scrollbar in IE 10+.
- */
-
-textarea {
-  overflow: auto;
-}
-
-/**
- * Correct the cursor style of increment and decrement buttons in Chrome.
- */
-
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
-/**
- * 1. Correct the outline style in Safari.
- */
-
-[type="search"] {
-  outline-offset: -2px; /* 1 */
-}
-
-/**
- * Remove the inner padding in Chrome and Safari on macOS.
- */
-
-[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-/**
- * 1. Correct the inability to style clickable types in iOS and Safari.
- * 2. Fix font inheritance.
- */
-
-::-webkit-file-upload-button {
-  -webkit-appearance: button; /* 1 */
-  font: inherit; /* 2 */
-}
-
-/**
- * Clickable labels
- */
-
-label[for] {
-  cursor: pointer;
-}
-
-/* Interactive */
-/* ============================================ */
-
-/*
- * Add the correct display in Edge, IE 10+, and Firefox.
- */
-
-details {
-  display: block;
-}
-
-/*
- * Add the correct display in all browsers.
- */
-
-summary {
-  display: list-item;
-}
-
-/*
- * Remove outline for editable content.
- */
-
-[contenteditable]:focus {
-  outline: auto;
-}
-
-/* Tables */
-/* ============================================ */
-
-/**
-1. Correct table border color inheritance in all Chrome and Safari.
-*/
-
-table {
-  border-color: inherit; /* 1 */
-}
-
-caption {
-  text-align: left;
-}
-
-td,
-th {
-  vertical-align: top;
-  padding: 0;
-}
-
-th {
-  text-align: left;
-  font-weight: bold;
-}
-</style><!-- random-length HTML comment: A0bSCx07aJyUJNPvyWz1y2qncxq79PN9FmRHZIExP0IYBXIyr7nd0UGSHvPGAbDDDUIdaMQqAWCBsKzXGb16v5M0oa6m17p4RxVq7kW74W7mhuAlLzh6srwXHq98nn13aMjYu3TpPQPu9PVKC0Hvi1GniDmJqbAHlhdWaw9oBOWAeqIeeNPCFTolXQsDptKQQlkpWjRVynTQTbuyp8yuRcToqBsVs0k7cKmyu3Hgeaww1gigcWOuxfYbhEvN5VKVfuHNlOtGof2fAaAcuMKfsh7PlsaeDlxgV4u7IdBu71O5ROX9agfIDaVmIwFJV2novXj1zkmwb0rqCCqcgJjhj4KpoNw9DZmyvLqkuSULG90I9eignHDKALxoYjmc8OQrZ4RJMjTQiHYil7EMCFWCRJrnqTFmfUU2OjAZJRppYCN97PL9VfCkmtNQAT2dlMVzuVM3m0gA2u7z7GyQly0LfEbdVU64eSrMl4FMumMkUIZPOLgyAU9dYZ7rr --><!-- random-length HTML comment: 2ftaZ4DYwUyA4BU36OwhSpD9azqsMJgEpOeCGhb3zN3sOLlKXWpnBqmcfTIraptD3OG9tf2hstP420CNKryMVbmyssfGXMKOYQMGvCnbu2VkqVw1AkBV9lJrTmypy61LMDR7E4WywpWaAIRAtQTs1cYJCKyyGp9QrQLvKhh4M3VMAkKt1dZq3vz53nr7RrN65YpE5M6FDRRB0Zur2IXv3LovyWsDB694Sm6Mw3RyIhz86inzqBihMNS8h9Ag57YNkVZWOpIWM8VIg85K7epHp8EM5Eq09EBhZZ4nEA8O8TWePSmNuSSZOWjJYP9YT85rVxSXyQluj6PxMz86HQVVl4e9HbVYaRFtCYHyosjMow90l5utLFEw7hwE8FbWUgGX2NJf5sricoWEjHvsMxfIUPKTSlnnGtA86Hd00IWSusURzDAA1dGLqQc80Gl6xj2urUifc4vLkEcYHaW83cIhqigeoFacpRKUlqzDikOIopewF0s7Q0e7Z8ZBEybrFjBqP0rxY46BjYvoPdjfSEapC0oGoGxtnwX3mEq98kAh9vKMMtrcvGHy4u2iyoPbakUBo9Alh8GerQq38WWrcbfULW098FbWnvVRsT0QR7s8LZ2HtMzJnSdzoTykWP799QOpkF31AmyL9qTs0G1dYSQBlFj7Sg4PvI3VLwMLWAVVomBcs06EIMFtPpogJit4pmNyZa8tYTFB3Gdj7XnDktxxWZRd6BYjnlXA9VuWmxXd1yCwMq0uXnfrAxK6ygfZG3aDMIZx5uOwjRht5 -->
